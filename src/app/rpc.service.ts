@@ -31,21 +31,18 @@ export class RpcService {
       // ↓ maybe need this
       // id: '1'
     }
-    const postData = JSON.stringify(body)
-    const options = {
-      auth: `${environment.rpcuser}:${environment.rpcpass}`,
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }
-    const url = `${environment.rpchost}:${environment.rpcport}`
-    return this.http.post(url, postData, options).pipe(
+    const auth = `${environment.rpcuser}:${environment.rpcpass}`
+    
+    const url = `http://${auth}@${environment.rpchost}:${environment.rpcport}`
+    return this.http.post(url, body).pipe(
+      /*
       timeout(3000),
       catchError(err => of({
         result: null,
         error: `Request timed out.`,
         id: body.id ?? null
       }))
+      */
     )
   }
 
