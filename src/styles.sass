@@ -1,0 +1,34 @@
+.g-border
+  border: black 1px solid
+.g-frame
+  @extend .g-border
+  padding: 0pt 30pt 20pt 30pt
+  gap: 4pt
+.g-flex
+  display: inline-flex
+  flex-wrap: wrap
+.g-flex-v 
+  @extend .g-flex
+  flex-direction: column
+.g-flex-h
+  @extend .g-flex
+  flex-direction: row
+.g-flex-vc
+  @extend .g-flex-v
+  align-items: center
+  justify-content: center
+.g-flex-hc
+  @extend .g-flex-h
+  align-items: center
+  justify-content: center
+
+body
+  font-family: monospace, monospace
+
+input[type="text"]
+  font-size: 12pt
+  height: 20pt
+
+button
+  font-size: 14pt
+  padding: 6px 8px

@@ -1,0 +1,10 @@
+<div class="g-frame g-flex-vc">
+  <h2>Launch new vote</h2>
+  <button (click)="newVote()">create</button>
+  <div *ngIf="result != undefined" class="g-flex-vc">
+    <h3>txid:</h3>
+    {{result.txid}}
+    <h3>contract address:</h3>
+    {{result.address}}
+  </div>
+</div>

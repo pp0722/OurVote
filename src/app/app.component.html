@@ -1,0 +1,9 @@
+
+<div class="g-flex-h">
+  <app-login (sendUUID)="recieveUUID($event)"></app-login>
+  <app-new-vote [uuid]="uuid"></app-new-vote>
+  <app-sign-up [uuid]="uuid"></app-sign-up>
+  <app-vote [uuid]="uuid"></app-vote>
+  <app-freeze [uuid]="uuid"></app-freeze>
+  <app-result></app-result>
+</div>

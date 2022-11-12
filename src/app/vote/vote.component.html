@@ -1,0 +1,16 @@
+<div class="g-flex-vc g-frame">
+  <h2>Vote</h2>
+  contract address:
+  <input type="text" placeholder="contract address" [(ngModel)]="address">
+  <button (click)="voteShow(address)">next</button>
+  <div *ngIf="candidates != null">
+    <h3>Candidates of {{address}}</h3>
+    <ul>
+      <li *ngFor="let cand of candidates">
+        <button (click)="vote(cand)">
+          <span class="name">{{cand}}</span>
+        </button>
+      </li>
+    </ul> 
+  </div>
+</div>

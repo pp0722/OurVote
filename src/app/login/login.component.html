@@ -1,0 +1,18 @@
+<div class="g-flex-vc g-frame">
+  <h2>Please log in</h2>
+  <input type="text" placeholder="Name" [(ngModel)]="name">
+  <input type="text" placeholder="Key" [(ngModel)]="key">
+  <input type="text" placeholder="Gmail(optional)" [(ngModel)]="gmail">
+  <div class="g-flex-h radio">
+    <input id="aid" type="radio" name="binding" value="aid">
+    <label for="aid">AID</label>
+    <input id="google" type="radio" name="binding" value="google">
+    <label for="google">google</label>
+  </div>
+  <button (click)="login()">log in</button>
+  
+  <div *ngIf="uuid != undefined" class="g-flex-vc">
+    <h3>uuid:</h3>
+    {{uuid}}
+  </div>
+</div>
