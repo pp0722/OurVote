@@ -72,7 +72,8 @@
               "browserTarget": "our-vote:build:production"
             },
             "development": {
-              "browserTarget": "our-vote:build:development"
+              "browserTarget": "our-vote:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
