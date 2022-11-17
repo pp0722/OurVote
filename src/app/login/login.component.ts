@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { RpcService } from '../rpc.service';
 
 @Component({
   selector: 'app-login',
@@ -13,9 +14,10 @@ export class LoginComponent implements OnInit {
   @Output() sendUUID: EventEmitter<string> = new EventEmitter()
   
   uuid?: string
-  constructor() { }
+  constructor(private rpcService: RpcService) { }
 
   ngOnInit(): void {
+    this.rpcService.getBlockCount().subscribe(console.log)
   }
 
   login (): void {

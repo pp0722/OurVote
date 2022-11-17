@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Observable, of, throwError } from 'rxjs';
 import { timeout, catchError } from 'rxjs/operators';
 import { environment } from '../environments/environment';
 
@@ -23,26 +23,28 @@ export class RpcService {
     private http: HttpClient
   ) { }
 
+    private handleError (error: HttpErrorResponse) {
+      console.error(`status: ${error.status}, error: ${error.error}`)
+      return throwError(() => new Error('Error.'))
+    }
+
   rpc (method: string, params: string[] = []): Observable<any> {
     const body: rpcRequestBody = {
       method,
-      // ↓ maybe need to remove "[]"
       params
-      // ↓ maybe need this
-      // id: '1'
     }
-    const auth = `${environment.rpcuser}:${environment.rpcpass}`
     
-    const url = `http://${auth}@${environment.rpchost}:${environment.rpcport}`
-    return this.http.post(url, body).pipe(
-      /*
+    const auth = `${environment.rpcuser}:${environment.rpcpass}`
+    const basicAuth = `Basic ${btoa(auth)}`
+    const header = new HttpHeaders()
+      .set('Authorization', basicAuth)
+    
+    
+    //const url = `http://${auth}@${environment.rpchost}:${environment.rpcport}`
+    const url = `/rpc`
+    return this.http.post(url, body, { headers: header }).pipe(
       timeout(3000),
-      catchError(err => of({
-        result: null,
-        error: `Request timed out.`,
-        id: body.id ?? null
-      }))
-      */
+      catchError(this.handleError)
     )
   }
 
@@ -57,5 +59,8 @@ export class RpcService {
   dumpcontractmessage (address: string, args: string[] = []): Observable<string> {
     args.unshift(address)
     return this.rpc('dumpcontractmessage', args)    
+  }
+  getBlockCount () {
+    return this.rpc('getblockcount')
   }
 }

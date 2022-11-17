@@ -1,6 +1,10 @@
 {
-  "/api": {
+  "/rpc": {
     "target": "http://localhost:8332",
-    "secure": false
+    "secure": false,
+    "pathRewrite": {
+      "^/rpc": ""
+    },
+    "logLevel": "debug"
   }
 }
