@@ -28,7 +28,7 @@ export class RpcService {
       return throwError(() => new Error('Error.'))
     }
 
-  rpc (method: string, params: string[] = []): Observable<any> {
+  rpc (method: string, params: string[] = []): Observable<rpcResult> {
     const body: rpcRequestBody = {
       method,
       params
@@ -38,12 +38,9 @@ export class RpcService {
     const basicAuth = `Basic ${btoa(auth)}`
     const header = new HttpHeaders()
       .set('Authorization', basicAuth)
-    
-    
-    //const url = `http://${auth}@${environment.rpchost}:${environment.rpcport}`
     const url = `/rpc`
     return this.http.post(url, body, { headers: header }).pipe(
-      timeout(3000),
+      timeout<any>(3000),
       catchError(this.handleError)
     )
   }
@@ -56,7 +53,7 @@ export class RpcService {
     args.unshift(address)
     return this.rpc('callcontract', args)
   }
-  dumpcontractmessage (address: string, args: string[] = []): Observable<string> {
+  dumpcontractmessage (address: string, args: string[] = []): Observable<rpcResult> {
     args.unshift(address)
     return this.rpc('dumpcontractmessage', args)    
   }

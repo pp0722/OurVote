@@ -17,7 +17,6 @@ export class LoginComponent implements OnInit {
   constructor(private rpcService: RpcService) { }
 
   ngOnInit(): void {
-    this.rpcService.getBlockCount().subscribe(console.log)
   }
 
   login (): void {

@@ -21,10 +21,8 @@ export class VoteComponent implements OnInit {
       .subscribe(obj => {
         console.log('voteShow', obj)
         try {
-        this.candidates = obj.split('\n')
+          this.candidates = obj.result.split('\n').splice(-1)
         } catch (e) {
-          // dummy candidates
-          this.candidates = ['Alice', 'Bob', 'Cathy']
         }
       })
 

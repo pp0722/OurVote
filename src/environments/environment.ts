@@ -5,10 +5,10 @@
 export const environment = {
   production: false,
   rpchost: 'localhost',
-  rpcport: 8332,
+  rpcport: 8332, // host and port are hard-coded in proxy.conf.json
   rpcuser: 'test',
   rpcpass: 'test',
-  votePath: './vote.c'
+  votePath: '/assets/vote.c'
 };
 
 /*
